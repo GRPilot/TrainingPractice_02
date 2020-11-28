@@ -28,44 +28,54 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsArea" type="VBoxContainer" parent="."]
-margin_left = 320.0
-margin_top = 168.0
-margin_right = 704.0
-margin_bottom = 424.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 0.96
+anchor_bottom = 0.933
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="ControlsArea"]
-margin_right = 384.0
+[node name="ControlsArea" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 289.0
+margin_top = 161.0
+margin_right = 733.0
+margin_bottom = 437.0
+rect_min_size = Vector2( 444, 276 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="CenterContainer/ControlsArea"]
+margin_right = 444.0
 margin_bottom = 52.0
 custom_fonts/font = SubResource( 1 )
 text = "You win!"
 align = 1
 valign = 1
 
-[node name="Line" type="ColorRect" parent="ControlsArea"]
+[node name="Line" type="ColorRect" parent="CenterContainer/ControlsArea"]
 margin_top = 56.0
-margin_right = 384.0
+margin_right = 444.0
 margin_bottom = 58.0
 grow_horizontal = 2
 rect_min_size = Vector2( 0, 2 )
 
-[node name="ScoreArea" type="HBoxContainer" parent="ControlsArea"]
+[node name="ScoreArea" type="HBoxContainer" parent="CenterContainer/ControlsArea"]
 margin_top = 62.0
-margin_right = 384.0
+margin_right = 444.0
 margin_bottom = 108.0
 
-[node name="ScoreLbl" type="Label" parent="ControlsArea/ScoreArea"]
+[node name="ScoreLbl" type="Label" parent="CenterContainer/ControlsArea/ScoreArea"]
 margin_right = 194.0
 margin_bottom = 46.0
 custom_fonts/font = SubResource( 2 )
 text = "Your score:"
 
-[node name="VSeparator" type="VSeparator" parent="ControlsArea/ScoreArea"]
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/ControlsArea/ScoreArea"]
 margin_left = 198.0
-margin_right = 336.0
+margin_right = 396.0
 margin_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -74,28 +84,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScoreLbl2" type="Label" parent="ControlsArea/ScoreArea"]
-margin_left = 340.0
-margin_right = 384.0
+[node name="Score" type="Label" parent="CenterContainer/ControlsArea/ScoreArea"]
+margin_left = 400.0
+margin_right = 444.0
 margin_bottom = 46.0
 custom_fonts/font = SubResource( 2 )
 text = "30"
 align = 2
 
-[node name="TimeArea" type="HBoxContainer" parent="ControlsArea"]
+[node name="TimeArea" type="HBoxContainer" parent="CenterContainer/ControlsArea"]
 margin_top = 112.0
-margin_right = 384.0
+margin_right = 444.0
 margin_bottom = 158.0
 
-[node name="TimeLbl" type="Label" parent="ControlsArea/TimeArea"]
+[node name="TimeLbl" type="Label" parent="CenterContainer/ControlsArea/TimeArea"]
 margin_right = 177.0
 margin_bottom = 46.0
 custom_fonts/font = SubResource( 2 )
 text = "Your time:"
 
-[node name="VSeparator2" type="VSeparator" parent="ControlsArea/TimeArea"]
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/ControlsArea/TimeArea"]
 margin_left = 181.0
-margin_right = 196.0
+margin_right = 256.0
 margin_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -104,17 +114,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Time" type="Label" parent="ControlsArea/TimeArea"]
-margin_left = 200.0
-margin_right = 384.0
+[node name="Time" type="Label" parent="CenterContainer/ControlsArea/TimeArea"]
+margin_left = 260.0
+margin_right = 444.0
 margin_bottom = 46.0
 custom_fonts/font = SubResource( 2 )
 text = "00:12:212"
 align = 2
 
-[node name="UsernameInputBox" type="LineEdit" parent="ControlsArea"]
+[node name="UsernameInputBox" type="LineEdit" parent="CenterContainer/ControlsArea"]
 margin_top = 162.0
-margin_right = 384.0
+margin_right = 444.0
 margin_bottom = 218.0
 rect_clip_content = true
 custom_fonts/font = SubResource( 3 )
@@ -125,31 +135,31 @@ clear_button_enabled = true
 selecting_enabled = false
 placeholder_text = "Enter your username"
 
-[node name="Line2" type="ColorRect" parent="ControlsArea"]
+[node name="Line2" type="ColorRect" parent="CenterContainer/ControlsArea"]
 margin_top = 222.0
-margin_right = 384.0
+margin_right = 444.0
 margin_bottom = 224.0
 grow_horizontal = 2
 rect_min_size = Vector2( 0, 2 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ControlsArea"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/ControlsArea"]
 margin_top = 228.0
-margin_right = 384.0
+margin_right = 444.0
 margin_bottom = 268.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton" type="Button" parent="ControlsArea/HBoxContainer"]
+[node name="BackButton" type="Button" parent="CenterContainer/ControlsArea/HBoxContainer"]
 margin_right = 80.0
 margin_bottom = 40.0
 custom_fonts/font = SubResource( 4 )
 text = "Back"
 
-[node name="VSeparator3" type="VSeparator" parent="ControlsArea/HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="CenterContainer/ControlsArea/HBoxContainer"]
 margin_left = 84.0
-margin_right = 217.0
+margin_right = 277.0
 margin_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -158,9 +168,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackButton2" type="Button" parent="ControlsArea/HBoxContainer"]
-margin_left = 221.0
-margin_right = 384.0
+[node name="SaveResultButton" type="Button" parent="CenterContainer/ControlsArea/HBoxContainer"]
+margin_left = 281.0
+margin_right = 444.0
 margin_bottom = 40.0
 custom_fonts/font = SubResource( 4 )
 text = "Save results"
+[connection signal="pressed" from="CenterContainer/ControlsArea/HBoxContainer/BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="CenterContainer/ControlsArea/HBoxContainer/SaveResultButton" to="." method="OnSaveResultButtonPressed"]

@@ -61,8 +61,10 @@ public class TimeLabel : Label {
 	public override void _Ready() {
 		base._Ready();
 		Text = leftTime.ToString();
-		GetNode("../../DrawAreaContainer")
-			.Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
+		DrawAreaContainer drawArea = GetNode<DrawAreaContainer>("../../DrawAreaContainer");
+
+		drawArea.Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
+		drawArea.Connect("UserMissClick", this, nameof(OnMissClick));
 		GetNode<Timer>("../../Timer")
 			.Connect("timeout", this, nameof(OnTimerTick));
 	}
@@ -74,8 +76,15 @@ public class TimeLabel : Label {
 	private void OnTimerTick() {
 		Text = (++leftTime).ToString();
 	}
-	private void OnAllCirclesActivated() {
+	private void OnAllCirclesActivated(int score) {
 		Timer timer = GetNode<Timer>("../../Timer");
 		timer.Stop();
+	}
+	private void OnMissClick() {
+		Timer timer = GetNode<Timer>("../../Timer");
+		if(timer.IsStopped()) {
+			return;
+		}
+		leftTime += 1;
 	}
 }
