@@ -13,10 +13,12 @@ public class ResultPanel : PopupPanel {
 	}
 
 	private void OnBackButtonPressed() {
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
 
 	private void OnSaveResultButtonPressed() {
-
+		// saving statistics
+		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
 	}
 }
 
