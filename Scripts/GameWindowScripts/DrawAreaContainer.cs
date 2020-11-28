@@ -2,6 +2,7 @@ using Godot;
 using System;
 
 public class DrawAreaContainer : PanelContainer {
+	private bool gameRunning = false;
 	private int score = 0;
 	private int DotsInRow;
 	private int DotsInColumn;
@@ -21,14 +22,19 @@ public class DrawAreaContainer : PanelContainer {
 	}
 
 	public override void _Input(InputEvent @event) {
-		if(Input.IsActionJustReleased("mouse_left")) {
-			if(IsMouseInField()) {
-				EmitSignal(nameof(DrawAreaPressed), GetLocalMousePosition());
-			}
-			if(score == maxScore) {
-				WinGame();
-			}
+		if(!Input.IsActionJustReleased("mouse_left")) {
+			return;
 		}
+
+		if(IsMouseInField() && !gameRunning) {
+			EmitSignal(nameof(StartGame));
+			gameRunning = false;
+		}
+
+		if(score == maxScore) {
+			WinGame();
+		}
+
 		base._Input(@event);
 	}
 
@@ -83,6 +89,6 @@ public class DrawAreaContainer : PanelContainer {
 		GD.Print("Score updated: " + score.ToString());
 	}
 
-	[Signal] public delegate void DrawAreaPressed(Vector2 MousePosition);
+	[Signal] public delegate void StartGame();
 	[Signal] public delegate void AllCirclesActivated();
 }
