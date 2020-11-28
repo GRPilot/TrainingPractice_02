@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Fonts/BAUHS93.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/Prefubs/ResultPanel.cs" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.215686 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 45
@@ -10,6 +13,10 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=2]
 size = 39
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxLine" id=6]
+
+[sub_resource type="StyleBoxLine" id=7]
 
 [sub_resource type="DynamicFont" id=3]
 size = 40
@@ -23,6 +30,7 @@ font_data = ExtResource( 1 )
 visible = true
 margin_right = 1024.0
 margin_bottom = 600.0
+custom_styles/panel = SubResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -80,6 +88,7 @@ margin_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+custom_styles/separator = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -110,6 +119,7 @@ margin_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+custom_styles/separator = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,6 +144,7 @@ max_length = 20
 clear_button_enabled = true
 selecting_enabled = false
 placeholder_text = "Enter your username"
+caret_blink = true
 
 [node name="Line2" type="ColorRect" parent="CenterContainer/ControlsArea"]
 margin_top = 222.0
@@ -142,37 +153,10 @@ margin_bottom = 224.0
 grow_horizontal = 2
 rect_min_size = Vector2( 0, 2 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/ControlsArea"]
+[node name="SaveResultButton" type="Button" parent="CenterContainer/ControlsArea"]
 margin_top = 228.0
 margin_right = 444.0
 margin_bottom = 268.0
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackButton" type="Button" parent="CenterContainer/ControlsArea/HBoxContainer"]
-margin_right = 80.0
-margin_bottom = 40.0
-custom_fonts/font = SubResource( 4 )
-text = "Back"
-
-[node name="VSeparator3" type="VSeparator" parent="CenterContainer/ControlsArea/HBoxContainer"]
-margin_left = 84.0
-margin_right = 277.0
-margin_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SaveResultButton" type="Button" parent="CenterContainer/ControlsArea/HBoxContainer"]
-margin_left = 281.0
-margin_right = 444.0
-margin_bottom = 40.0
 custom_fonts/font = SubResource( 4 )
 text = "Save results"
-[connection signal="pressed" from="CenterContainer/ControlsArea/HBoxContainer/BackButton" to="." method="OnBackButtonPressed"]
-[connection signal="pressed" from="CenterContainer/ControlsArea/HBoxContainer/SaveResultButton" to="." method="OnSaveResultButtonPressed"]
+[connection signal="pressed" from="CenterContainer/ControlsArea/SaveResultButton" to="." method="OnSaveResultButtonPressed"]

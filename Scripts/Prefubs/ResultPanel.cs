@@ -11,11 +11,6 @@ public class ResultPanel : PopupPanel {
 	public void SetTime(string time) {
 		GetNode<Label>("CenterContainer/ControlsArea/TimeArea/Time").Text = time;
 	}
-
-	private void OnBackButtonPressed() {
-		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
-	}
-
 	private void OnSaveResultButtonPressed() {
 		// saving statistics
 		GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
