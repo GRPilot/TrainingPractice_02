@@ -78,7 +78,6 @@ public class DrawAreaContainer : PanelContainer {
 	private void SpawnCircle(Vector2 position) {
 		Circle obj = CirclePrefub.Instance() as Circle;
 		obj.Position = position;
-		obj.Scale = new Vector2(0.1f, 0.1f);
 		AddChild(obj);
 		obj.Owner = this;
 		obj.Connect("Activated", this, nameof(OnActivated));
