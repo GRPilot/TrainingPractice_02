@@ -8,6 +8,20 @@ public class TimeLabel : Label {
 		private uint seconds = 0;
 		private uint minutes = 0;
 
+		public static Time operator+(Time obj, uint seconds) {
+			if(seconds == 0) {
+				return obj;
+			}
+
+			obj.seconds += seconds;
+			if(obj.seconds < 60) {
+				return obj;
+			}
+
+			obj.minutes += obj.seconds / 60;
+			obj.seconds %= 60;
+			return obj;
+		}
 		public static Time operator++(Time obj) {
 			++obj.milliseconds;
 			if(obj.milliseconds < 100) {
@@ -53,9 +67,12 @@ public class TimeLabel : Label {
 			.Connect("timeout", this, nameof(OnTimerTick));
 	}
 
+	public string GetTime() {
+		return leftTime.ToString();
+	}
+
 	private void OnTimerTick() {
-		++leftTime;
-		Text = leftTime.ToString();
+		Text = (++leftTime).ToString();
 	}
 	private void OnAllCirclesActivated() {
 		Timer timer = GetNode<Timer>("../../Timer");
