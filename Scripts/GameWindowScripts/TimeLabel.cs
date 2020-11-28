@@ -2,57 +2,60 @@ using Godot;
 using System;
 
 public class TimeLabel : Label {
-	const string textFormat = "{0}:{1}";
 
-	private int seconds = 0;
-	private int minutes = 0;
+	private class Time {
+		private uint milliseconds = 0;
+		private uint seconds = 0;
+		private uint minutes = 0;
+
+		public static Time operator++(Time obj) {
+			++obj.milliseconds;
+			if(obj.milliseconds < 100) {
+				return obj;
+			}
+			obj.milliseconds = 0;
+
+			++obj.seconds;
+			if(obj.seconds < 60) {
+				return obj;
+			}
+			obj.seconds = 0;
+
+			++obj.minutes;
+			return obj;
+		}
+		public override string ToString() {
+			string ms_str = "";
+			if(milliseconds < 100) {
+				ms_str += "0";
+			}
+			if(milliseconds < 10) {
+				ms_str += "0";
+			}
+			ms_str += milliseconds.ToString();
+			return string.Format("{2}:{1}:{0}", ms_str,
+				(seconds < 10 ? "0" : "") + seconds.ToString(),
+				(minutes < 10 ? "0" : "") + minutes.ToString()
+			);
+		}
+	}
+
+	Time leftTime = new Time();
+
 	private bool running = false;
 
 	public override void _Ready() {
 		base._Ready();
-		Text = string.Format(textFormat, "00", "00");
-		Node dac = GetNode("../../DrawAreaContainer");
-		dac.Connect("DrawAreaPressed", this, nameof(OnDrawAreaPressed));
-		dac.Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
-	}
-
-	private void OnDrawAreaPressed(Vector2 MousePosition) {
-		if(running) {
-			return;
-		}
-		running = true;
-		Timer timer = GetNode<Timer>("../../Timer");
-		if(timer == null) {
-			Text = "Timer was broken";
-		}
-		timer.Connect("timeout", this, nameof(OnTimerTick));
-		timer.WaitTime = 1.0f;
-		timer.Start();
+		Text = leftTime.ToString();
+		GetNode("../../DrawAreaContainer")
+			.Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
+		GetNode<Timer>("../../Timer")
+			.Connect("timeout", this, nameof(OnTimerTick));
 	}
 
 	private void OnTimerTick() {
-		++seconds;
-		if(seconds >= 60) {
-			seconds = 0;
-			++minutes;
-		}
-		if(minutes >= 60) {
-			minutes = 0;
-		}
-
-		string sec_str = "";
-		string min_str = "";
-
-		if(seconds <= 9) {
-			sec_str = "0";
-		}
-		if(minutes <= 9) {
-			min_str = "0";
-		}
-		sec_str += seconds.ToString();
-		min_str += minutes.ToString();
-
-		Text = string.Format(textFormat, min_str, sec_str);
+		++leftTime;
+		Text = leftTime.ToString();
 	}
 	private void OnAllCirclesActivated() {
 		Timer timer = GetNode<Timer>("../../Timer");
