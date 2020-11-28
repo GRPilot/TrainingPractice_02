@@ -40,11 +40,9 @@ public class Circle : Node2D {
 
 	private bool IsMouseInCircle() {
 		float radius = GetChild<Sprite>(0).Texture.GetSize().x / 2;
-		radius *= Scale.x;
-		Vector2 mPos = GetGlobalMousePosition();
-		float distance = Position.DistanceTo(mPos);
+		float len = GetLocalMousePosition().Length();
 
-		return distance < radius;
+		return len <= radius;
 	}
 	private void Switch(bool active) {
 		Sprite red = GetChild<Sprite>(0);

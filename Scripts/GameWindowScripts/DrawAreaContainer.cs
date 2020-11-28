@@ -2,8 +2,10 @@ using Godot;
 using System;
 
 public class DrawAreaContainer : PanelContainer {
+	private bool gameDone = false;
 	private bool gameRunning = false;
 	private int score = 0;
+	private int lastScore = 0;
 	private int DotsInRow;
 	private int DotsInColumn;
 	private int maxScore = 0;
@@ -11,8 +13,8 @@ public class DrawAreaContainer : PanelContainer {
 
 	public DrawAreaContainer() {
 		// TODO: Make settings singltone class which contain count of dots
-		DotsInRow = 5;
-		DotsInColumn = 5;
+		DotsInRow = 2;
+		DotsInColumn = 2;
 		maxScore = DotsInColumn * DotsInRow;
 	}
 	public override void _Ready() {
@@ -22,6 +24,9 @@ public class DrawAreaContainer : PanelContainer {
 	}
 
 	public override void _Input(InputEvent @event) {
+		if(gameDone) {
+			return;
+		}
 		if(!Input.IsActionJustReleased("mouse_left")) {
 			return;
 		}
@@ -35,16 +40,16 @@ public class DrawAreaContainer : PanelContainer {
 			WinGame();
 		}
 
+		if(lastScore == score) {
+			EmitSignal(nameof(UserMissClick));
+		}
+
 		base._Input(@event);
 	}
 
-	public override void _PhysicsProcess(float delta) {
-		base._PhysicsProcess(delta);
-	}
-
 	private void WinGame() {
-		// Send all status in statistics class
-		EmitSignal(nameof(AllCirclesActivated));
+		EmitSignal(nameof(AllCirclesActivated), score);
+		gameDone = true;
 	}
 
 	private bool IsMouseInField() {
@@ -78,17 +83,22 @@ public class DrawAreaContainer : PanelContainer {
 	private void SpawnCircle(Vector2 position) {
 		Circle obj = CirclePrefub.Instance() as Circle;
 		obj.Position = position;
-		obj.Scale = new Vector2(0.1f, 0.1f);
 		AddChild(obj);
 		obj.Owner = this;
 		obj.Connect("Activated", this, nameof(OnActivated));
 	}
 
+	public int GetScore() {
+		return score;
+	}
 	private void OnActivated() {
 		++score;
 		GD.Print("Score updated: " + score.ToString());
 	}
 
 	[Signal] public delegate void StartGame();
-	[Signal] public delegate void AllCirclesActivated();
+	[Signal] public delegate void AllCirclesActivated(int score);
+	[Signal] public delegate void UserMissClick();
+
+
 }

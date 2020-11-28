@@ -8,6 +8,20 @@ public class TimeLabel : Label {
 		private uint seconds = 0;
 		private uint minutes = 0;
 
+		public static Time operator+(Time obj, uint seconds) {
+			if(seconds == 0) {
+				return obj;
+			}
+
+			obj.seconds += seconds;
+			if(obj.seconds < 60) {
+				return obj;
+			}
+
+			obj.minutes += obj.seconds / 60;
+			obj.seconds %= 60;
+			return obj;
+		}
 		public static Time operator++(Time obj) {
 			++obj.milliseconds;
 			if(obj.milliseconds < 100) {
@@ -47,18 +61,30 @@ public class TimeLabel : Label {
 	public override void _Ready() {
 		base._Ready();
 		Text = leftTime.ToString();
-		GetNode("../../DrawAreaContainer")
-			.Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
+		DrawAreaContainer drawArea = GetNode<DrawAreaContainer>("../../DrawAreaContainer");
+
+		drawArea.Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
+		drawArea.Connect("UserMissClick", this, nameof(OnMissClick));
 		GetNode<Timer>("../../Timer")
 			.Connect("timeout", this, nameof(OnTimerTick));
 	}
 
-	private void OnTimerTick() {
-		++leftTime;
-		Text = leftTime.ToString();
+	public string GetTime() {
+		return leftTime.ToString();
 	}
-	private void OnAllCirclesActivated() {
+
+	private void OnTimerTick() {
+		Text = (++leftTime).ToString();
+	}
+	private void OnAllCirclesActivated(int score) {
 		Timer timer = GetNode<Timer>("../../Timer");
 		timer.Stop();
+	}
+	private void OnMissClick() {
+		Timer timer = GetNode<Timer>("../../Timer");
+		if(timer.IsStopped()) {
+			return;
+		}
+		leftTime += 1;
 	}
 }
