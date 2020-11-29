@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/MainMenuScripts/StartButton.cs" type="Script" id=1]
 [ext_resource path="res://Scripts/MainMenuScripts/ExitButton.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/MainMenuScripts/StatisticButton.cs" type="Script" id=3]
+[ext_resource path="res://Fonts/BAUHS93.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 27
+font_data = ExtResource( 4 )
 
 [node name="MainMenu" type="Node2D"]
 
@@ -23,6 +28,7 @@ __meta__ = {
 margin_right = 168.0
 margin_bottom = 42.0
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
 text = "Start Game"
 script = ExtResource( 1 )
 
@@ -31,6 +37,7 @@ margin_top = 50.0
 margin_right = 168.0
 margin_bottom = 92.0
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
 text = "Statistics"
 script = ExtResource( 3 )
 
@@ -39,6 +46,7 @@ margin_top = 100.0
 margin_right = 168.0
 margin_bottom = 142.0
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
 disabled = true
 text = "Settings"
 
@@ -47,6 +55,7 @@ margin_top = 150.0
 margin_right = 168.0
 margin_bottom = 192.0
 size_flags_vertical = 3
+custom_fonts/font = SubResource( 1 )
 text = "Exit"
 script = ExtResource( 2 )
 [connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer/StartButton" method="OnStartButtonPressed"]
