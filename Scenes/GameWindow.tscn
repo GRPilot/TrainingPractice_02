@@ -8,7 +8,7 @@
 [ext_resource path="res://Pictures/background_game.jpg" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0.380392 )
+bg_color = Color( 1, 1, 1, 0.317647 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 30
