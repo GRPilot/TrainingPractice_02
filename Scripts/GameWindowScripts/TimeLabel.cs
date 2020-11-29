@@ -45,6 +45,12 @@ public class TimeLabel : Label {
                 (     minutes < 10 ? "0" : "") + minutes.ToString()
             );
         }
+        public string Limit() {
+            return string.Format("{1}:{0}",
+                (     seconds < 10 ? "0" : "") + seconds.ToString(),
+                (     minutes < 10 ? "0" : "") + minutes.ToString()
+            );
+        }
     }
 
     Time leftTime = new Time();
@@ -68,7 +74,7 @@ public class TimeLabel : Label {
 
     private void OnTimerTick() {
         Text = (++leftTime).ToString();
-        if(leftTime.ToString() == GlobalVariables.GameMode.GetTimeLimit()) {
+        if(leftTime.Limit() == GlobalVariables.GameMode.GetTimeLimit()) {
             Timer timer = GetNode<Timer>("../../Timer");
             timer.Stop();
             EmitSignal(nameof(TimeLeft));

@@ -15,8 +15,8 @@ public class GlobalVariables : Node {
         public static readonly Vector2 SpeedDotsCount = new Vector2(10, 10);
         public static readonly Vector2 TimeDotsCount = new Vector2(20, 20);
 
-        public const string SpeedModeTimeLimit = "01:00:00";
-        public const string TimeModeTimeLimit = "99:99:99";
+        public const string SpeedModeTimeLimit = "01:00";
+        public const string TimeModeTimeLimit = "99:99";
         public static Vector2 GetDotsCount() {
             switch(CurrentMode) {
                 case Mode.Speed:
