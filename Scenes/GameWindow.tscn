@@ -126,4 +126,3 @@ process_mode = 0
 wait_time = 0.001
 
 [node name="ResultPanel" parent="." instance=ExtResource( 5 )]
-visible = false

@@ -21,6 +21,10 @@ public class DrawAreaContainer : PanelContainer {
     public override void _Ready() {
         SetProcessInput(true);
         InitializeCircles(DotsInRow, DotsInColumn);
+
+        GetNode<GameWindow>("../../GameWindow")
+            .Connect("StopGame", this, nameof(OnStopGame));
+
         base._Ready();
     }
 
@@ -108,6 +112,11 @@ public class DrawAreaContainer : PanelContainer {
 
     private void UpdateLabel(string name, int value) {
         GetNode<Label>($"../StatisticContainer/{name}").Text = $" {value}";
+    }
+
+    private void OnStopGame() {
+        gameDone = true;
+        gameRunning = false;
     }
     [Signal] public delegate void StartGame();
     [Signal] public delegate void AllCirclesActivated(int score);

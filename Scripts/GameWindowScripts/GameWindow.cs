@@ -35,6 +35,8 @@ public class GameWindow : Node2D {
     }
 
     private void ShowResults(string title, int score) {
+        EmitSignal(nameof(StopGame));
+
         ResultPanel resultPanel = GetNode<ResultPanel>("ResultPanel");
         resultPanel.SetTitle(title);
         resultPanel.SetScore(score.ToString());
@@ -48,4 +50,6 @@ public class GameWindow : Node2D {
         int score = GetNode<DrawAreaContainer>("DrawAreaContainer").GetScore();
         ShowResults("Time left!", score);
     }
+
+    [Signal] public delegate void StopGame();
 }

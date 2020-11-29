@@ -55,8 +55,6 @@ public class TimeLabel : Label {
 
     Time leftTime = new Time();
 
-    private bool running = false;
-
     public override void _Ready() {
         base._Ready();
         Text = leftTime.ToString();
@@ -73,9 +71,10 @@ public class TimeLabel : Label {
     }
 
     private void OnTimerTick() {
+        Timer timer = GetNode<Timer>("../../Timer");
+        ++leftTime;
         Text = (++leftTime).ToString();
         if(leftTime.Limit() == GlobalVariables.GameMode.GetTimeLimit()) {
-            Timer timer = GetNode<Timer>("../../Timer");
             timer.Stop();
             EmitSignal(nameof(TimeLeft));
         }
@@ -87,8 +86,10 @@ public class TimeLabel : Label {
     private void OnMissClick() {
         Timer timer = GetNode<Timer>("../../Timer");
         if(timer.IsStopped()) {
+            GD.Print("Timer stopped");
             return;
         }
+        GD.Print("Miss click");
         leftTime += 1;
     }
 
