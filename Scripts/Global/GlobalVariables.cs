@@ -13,7 +13,7 @@ public class GlobalVariables : Node {
         public const string Time = "TimeMode";
 
         public static readonly Vector2 SpeedDotsCount = new Vector2(10, 10);
-        public static readonly Vector2 TimeDotsCount = new Vector2(20, 20);
+        public static readonly Vector2 TimeDotsCount = new Vector2(10, 10);
 
         public const string SpeedModeTimeLimit = "01:00";
         public const string TimeModeTimeLimit = "99:99";
