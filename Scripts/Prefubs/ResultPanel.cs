@@ -22,7 +22,7 @@ public class ResultPanel : PopupPanel {
         );
     }
     public string GetTime() {
-        return GetNode<Label>("CenterContainer/ControlsArea/ScoreArea/Time").Text;
+        return GetNode<Label>("CenterContainer/ControlsArea/TimeArea/Time").Text;
     }
     private void OnSaveResultButtonPressed() {
         string username = GetUsername();
