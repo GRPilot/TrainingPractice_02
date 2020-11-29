@@ -5,5 +5,6 @@ using System.Collections.Generic;
 public class StatisticButton : Button {
     static int uid = 0;
     private void OnStatisticButtonPressed() {
+        GetTree().ChangeScene("res://Scenes/Statistics.tscn");
     }
 }

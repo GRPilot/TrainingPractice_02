@@ -8,4 +8,9 @@ public class GlobalVariables : Node {
         public const string MacOSPath = GameShortName + "/"; //"~/Library/Application Support/" + GameShortName + "/";
         public const string LinuxPath = GameShortName + "/"; //"~/.local/share/" + GameShortName + "/";
     }
+
+    public struct GameMode {
+        public const string Speed = "SpeedMode";
+        public const string Time = "TimeMode";
+    }
 }
