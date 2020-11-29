@@ -32,7 +32,8 @@ public class GameWindow : Node2D {
     }
 
     private void ShowResults(string title, int score) {
-        GD.Print(title);
+        GetNode<TextureRect>("DrawAreaContainer").Visible = false;
+
         ResultPanel resultPanel = GetNode<ResultPanel>("ResultPanel");
         resultPanel.SetTitle(title);
         resultPanel.SetScore(score.ToString());
