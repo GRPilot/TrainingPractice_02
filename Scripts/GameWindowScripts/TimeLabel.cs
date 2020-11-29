@@ -39,17 +39,10 @@ public class TimeLabel : Label {
             return obj;
         }
         public override string ToString() {
-            string ms_str = "";
-            if(milliseconds < 100) {
-                ms_str += "0";
-            }
-            if(milliseconds < 10) {
-                ms_str += "0";
-            }
-            ms_str += milliseconds.ToString();
-            return string.Format("{2}:{1}:{0}", ms_str,
-                (seconds < 10 ? "0" : "") + seconds.ToString(),
-                (minutes < 10 ? "0" : "") + minutes.ToString()
+            return string.Format("{2}:{1}:{0}",
+                (milliseconds < 10 ? "0" : "") + milliseconds.ToString(),
+                (     seconds < 10 ? "0" : "") + seconds.ToString(),
+                (     minutes < 10 ? "0" : "") + minutes.ToString()
             );
         }
     }
