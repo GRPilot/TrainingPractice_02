@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Fonts/BAUHS93.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Prefubs/StatisticListItem.cs" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 1 )
+
+[node name="StatisticListItem" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 0.0383333
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator5" type="VSeparator" parent="."]
+margin_right = 4.0
+margin_bottom = 23.0
+
+[node name="ID" type="Label" parent="."]
+margin_left = 8.0
+margin_right = 41.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 33, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "100"
+
+[node name="VSeparator3" type="VSeparator" parent="."]
+margin_left = 45.0
+margin_right = 49.0
+margin_bottom = 23.0
+
+[node name="Username" type="Label" parent="."]
+margin_left = 53.0
+margin_right = 877.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 33, 0 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+text = "Gollan"
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+margin_left = 881.0
+margin_right = 885.0
+margin_bottom = 23.0
+
+[node name="Time" type="Label" parent="."]
+margin_left = 889.0
+margin_right = 971.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 33, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "00:01:23"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+margin_left = 975.0
+margin_right = 979.0
+margin_bottom = 23.0
+
+[node name="Score" type="Label" parent="."]
+margin_left = 983.0
+margin_right = 1016.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 33, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "100"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSeparator4" type="VSeparator" parent="."]
+margin_left = 1020.0
+margin_right = 1024.0
+margin_bottom = 23.0
