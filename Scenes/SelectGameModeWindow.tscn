@@ -12,6 +12,7 @@ outline_color = Color( 0.0235294, 0.00392157, 0.00392157, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxLine" id=2]
+color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
