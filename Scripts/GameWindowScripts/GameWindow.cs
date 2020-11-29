@@ -11,6 +11,9 @@ public class GameWindow : Node2D {
 
         GetNode("DrawAreaContainer")
             .Connect("AllCirclesActivated", this, nameof(OnAllCirclesActivated));
+
+        GetNode("StatisticContainer/TimeLabel")
+            .Connect("TimeLeft", this, nameof(OnTimeLeft));
     }
 
     public override void _Process(float delta) {
@@ -43,4 +46,8 @@ public class GameWindow : Node2D {
         resultPanel.PopupCentered();
     }
 
+    private void OnTimeLeft() {
+        int score = GetNode<DrawAreaContainer>("DrawAreaContainer").GetScore();
+        ShowResults("Time left!", score);
+    }
 }

@@ -75,6 +75,11 @@ public class TimeLabel : Label {
 
     private void OnTimerTick() {
         Text = (++leftTime).ToString();
+        if(leftTime.ToString() == GlobalVariables.GameMode.GetTimeLimit()) {
+            Timer timer = GetNode<Timer>("../../Timer");
+            timer.Stop();
+            EmitSignal(nameof(TimeLeft));
+        }
     }
     private void OnAllCirclesActivated(int score) {
         Timer timer = GetNode<Timer>("../../Timer");
@@ -87,4 +92,7 @@ public class TimeLabel : Label {
         }
         leftTime += 1;
     }
+
+    [Signal] public delegate void TimeLeft();
+
 }

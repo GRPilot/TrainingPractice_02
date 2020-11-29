@@ -24,7 +24,27 @@ public class GlobalVariables : Node {
                 case Mode.Time:
                     return TimeDotsCount;
             }
-            return SpeedDotsCount;
+            return TimeDotsCount;
+        }
+
+        public static string GetTimeLimit() {
+            switch(CurrentMode) {
+                case Mode.Speed:
+                    return SpeedModeTimeLimit;
+                case Mode.Time:
+                    return TimeModeTimeLimit;
+            }
+            return TimeModeTimeLimit;
+        }
+
+        public static string GetCurrentModeStr() {
+            switch(CurrentMode) {
+                case Mode.Speed:
+                    return Speed;
+                case Mode.Time:
+                    return Time;
+            }
+            return Time;
         }
     }
     public const string GameShortName = "IYHSS";
