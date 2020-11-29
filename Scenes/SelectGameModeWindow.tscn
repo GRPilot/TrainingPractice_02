@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Pictures/background_game.jpg" type="Texture" id=1]
 [ext_resource path="res://Fonts/BAUHS93.TTF" type="DynamicFontData" id=2]
-[ext_resource path="res://Scripts/SelectGameModeWindow/ModeButtons.cs" type="Script" id=3]
-[ext_resource path="res://Scripts/SelectGameModeWindow/BackMenuButtons.cs" type="Script" id=4]
+[ext_resource path="res://Scripts/SelectGameModeWindow/BackButtonCont.cs" type="Script" id=3]
+[ext_resource path="res://Scripts/SelectGameModeWindow/ButtonsModeCont.cs" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.458824, 0.0784314, 0.129412, 0.447059 )
@@ -76,6 +76,7 @@ margin_top = 70.0
 margin_right = 500.0
 margin_bottom = 113.0
 size_flags_vertical = 3
+script = ExtResource( 4 )
 
 [node name="VSeparator2" type="VSeparator" parent="CenterContainer/Panel/VBoxContainer/ButtonsModeCont"]
 margin_right = 40.0
@@ -93,7 +94,6 @@ margin_bottom = 43.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 4 )
 text = "Time mode"
-script = ExtResource( 3 )
 
 [node name="VSeparator" type="VSeparator" parent="CenterContainer/Panel/VBoxContainer/ButtonsModeCont"]
 margin_left = 225.0
@@ -112,7 +112,6 @@ margin_bottom = 43.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 4 )
 text = "Speed mode"
-script = ExtResource( 3 )
 
 [node name="VSeparator3" type="VSeparator" parent="CenterContainer/Panel/VBoxContainer/ButtonsModeCont"]
 margin_left = 460.0
@@ -135,6 +134,7 @@ margin_top = 137.0
 margin_right = 500.0
 margin_bottom = 180.0
 size_flags_vertical = 3
+script = ExtResource( 3 )
 
 [node name="VSeparator" type="VSeparator" parent="CenterContainer/Panel/VBoxContainer/BackButtonCont"]
 margin_right = 40.0
@@ -152,7 +152,6 @@ margin_bottom = 43.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 4 )
 text = "Back"
-script = ExtResource( 4 )
 
 [node name="VSeparator3" type="VSeparator" parent="CenterContainer/Panel/VBoxContainer/BackButtonCont"]
 margin_left = 460.0
@@ -169,3 +168,6 @@ margin_top = 184.0
 margin_right = 500.0
 margin_bottom = 200.0
 size_flags_vertical = 3
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonsModeCont/TimeModeButton" to="CenterContainer/Panel/VBoxContainer/ButtonsModeCont" method="OnTimeModeButtonPressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/ButtonsModeCont/SpeedModeButton" to="CenterContainer/Panel/VBoxContainer/ButtonsModeCont" method="OnSpeedModeButtonPressed"]
+[connection signal="pressed" from="CenterContainer/Panel/VBoxContainer/BackButtonCont/BackMenuButton" to="CenterContainer/Panel/VBoxContainer/BackButtonCont" method="OnBackMenuButtonPressed"]

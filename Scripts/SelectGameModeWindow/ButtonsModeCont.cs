@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public class TimeModeButton : Button {
+public class ButtonsModeCont : HBoxContainer {
+
     public void OnTimeModeButtonPressed() {
         GlobalVariables.GameMode.CurrentMode = GlobalVariables.GameMode.Mode.Time;
         StartGame();
