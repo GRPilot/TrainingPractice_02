@@ -39,24 +39,21 @@ public class TimeLabel : Label {
             return obj;
         }
         public override string ToString() {
-            string ms_str = "";
-            if(milliseconds < 100) {
-                ms_str += "0";
-            }
-            if(milliseconds < 10) {
-                ms_str += "0";
-            }
-            ms_str += milliseconds.ToString();
-            return string.Format("{2}:{1}:{0}", ms_str,
-                (seconds < 10 ? "0" : "") + seconds.ToString(),
-                (minutes < 10 ? "0" : "") + minutes.ToString()
+            return string.Format("{2}:{1}:{0}",
+                (milliseconds < 10 ? "0" : "") + milliseconds.ToString(),
+                (     seconds < 10 ? "0" : "") + seconds.ToString(),
+                (     minutes < 10 ? "0" : "") + minutes.ToString()
+            );
+        }
+        public string Limit() {
+            return string.Format("{1}:{0}",
+                (     seconds < 10 ? "0" : "") + seconds.ToString(),
+                (     minutes < 10 ? "0" : "") + minutes.ToString()
             );
         }
     }
 
     Time leftTime = new Time();
-
-    private bool running = false;
 
     public override void _Ready() {
         base._Ready();
@@ -74,7 +71,13 @@ public class TimeLabel : Label {
     }
 
     private void OnTimerTick() {
+        Timer timer = GetNode<Timer>("../../Timer");
+        ++leftTime;
         Text = (++leftTime).ToString();
+        if(leftTime.Limit() == GlobalVariables.GameMode.GetTimeLimit()) {
+            timer.Stop();
+            EmitSignal(nameof(TimeLeft));
+        }
     }
     private void OnAllCirclesActivated(int score) {
         Timer timer = GetNode<Timer>("../../Timer");
@@ -83,8 +86,13 @@ public class TimeLabel : Label {
     private void OnMissClick() {
         Timer timer = GetNode<Timer>("../../Timer");
         if(timer.IsStopped()) {
+            GD.Print("Timer stopped");
             return;
         }
+        GD.Print("Miss click");
         leftTime += 1;
     }
+
+    [Signal] public delegate void TimeLeft();
+
 }

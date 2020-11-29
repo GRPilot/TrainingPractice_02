@@ -5,6 +5,7 @@ public class DrawAreaContainer : PanelContainer {
     private bool gameDone = false;
     private bool gameRunning = false;
     private int score = 0;
+    private int clicks = 0;
     private int lastScore = 0;
     private int DotsInRow;
     private int DotsInColumn;
@@ -12,14 +13,18 @@ public class DrawAreaContainer : PanelContainer {
     private PackedScene CirclePrefub = ResourceLoader.Load("res://Prefubs/Circle.tscn") as PackedScene;
 
     public DrawAreaContainer() {
-        // TODO: Make settings singltone class which contain count of dots
-        DotsInRow = 2;
-        DotsInColumn = 2;
+        Vector2 dotsCount = GlobalVariables.GameMode.GetDotsCount();
+        DotsInRow = Convert.ToInt32(dotsCount.x);
+        DotsInColumn = Convert.ToInt32(dotsCount.y);
         maxScore = DotsInColumn * DotsInRow;
     }
     public override void _Ready() {
         SetProcessInput(true);
         InitializeCircles(DotsInRow, DotsInColumn);
+
+        GetNode<GameWindow>("../../GameWindow")
+            .Connect("StopGame", this, nameof(OnStopGame));
+
         base._Ready();
     }
 
@@ -30,6 +35,7 @@ public class DrawAreaContainer : PanelContainer {
         if(!Input.IsActionJustReleased("mouse_left")) {
             return;
         }
+        UpdateClicks();
 
         if(IsMouseInField() && !gameRunning) {
             EmitSignal(nameof(StartGame));
@@ -66,7 +72,7 @@ public class DrawAreaContainer : PanelContainer {
 
     private void InitializeCircles(int countInRow, int countInColumn) {
         const int scale = 2;
-        Vector2 sz = GetViewportRect().Size;
+        Vector2 sz = RectSize;
         int horizontalPadding = Convert.ToInt32(sz.x) / countInRow / scale;
         int verticalPadding = Convert.ToInt32(sz.y) / countInColumn / scale;
         for(int h = 1; h <= countInColumn; ++h) {
@@ -83,6 +89,9 @@ public class DrawAreaContainer : PanelContainer {
     private void SpawnCircle(Vector2 position) {
         Circle obj = CirclePrefub.Instance() as Circle;
         obj.Position = position;
+        if(GlobalVariables.GameMode.CurrentMode == GlobalVariables.GameMode.Mode.Time) {
+            obj.Scale -= new Vector2(0.006f, 0.006f);
+        }
         AddChild(obj);
         obj.Owner = this;
         obj.Connect("Activated", this, nameof(OnActivated));
@@ -93,9 +102,22 @@ public class DrawAreaContainer : PanelContainer {
     }
     private void OnActivated() {
         ++score;
-        GD.Print("Score updated: " + score.ToString());
+        UpdateLabel("ScoreCount", score);
     }
 
+    private void UpdateClicks() {
+        ++clicks;
+        UpdateLabel("ClickCount", clicks);
+    }
+
+    private void UpdateLabel(string name, int value) {
+        GetNode<Label>($"../StatisticContainer/{name}").Text = $" {value}";
+    }
+
+    private void OnStopGame() {
+        gameDone = true;
+        gameRunning = false;
+    }
     [Signal] public delegate void StartGame();
     [Signal] public delegate void AllCirclesActivated(int score);
     [Signal] public delegate void UserMissClick();
